@@ -42,22 +42,25 @@
       margin-top: 25px;
       text-shadow: 0 0 10px #fff;
     }
-    .heart {
+    animation: wiggle 3s ease-in-out forwards; {
       position: absolute;
       font-size: 2rem;
       color: red;
       animation: fall 3s linear forwards;
     }
-    @keyframes fall {
-      0% { transform: translateY(-50px) scale(1); opacity: 1; }
-      100% { transform: translateY(100vh) scale(1.5); opacity: 0; }
-    }
+    @keyframes wiggle {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(-10deg); }
+  50% { transform: translateY(0) rotate(10deg); }
+  75% { transform: translateY(-10px) rotate(-10deg); }
+  100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+}
   </style>
 </head>
 <body>
   <h1>Click the Button to See the Surprise!</h1>
   <button onclick="showBirthdayMessage()">Reveal</button>
-  <div id="message">🎉 Happy Birthday! ❤️ I Love You Tooba! ❤️ 🎉</div>
+  <div id="message">🎉 ! ❤️ I Love You Tooba! ❤️ 🎉</div>
 
   <!-- Background music (hidden) -->
   <audio id="bg-music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f9a962b9f3.mp3?filename=cute-romantic-11277.mp3"></audio>
@@ -87,3 +90,4 @@
   </script>
 </body>
 </html>
+
