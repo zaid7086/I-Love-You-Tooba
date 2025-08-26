@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hye Cutie!</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: seagreen; /* Sea green background */
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      color: #fff;
+      background: #ff4d4d;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background: #e60000;
+    }
+    #message {
+      display: none;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-top: 25px;
+      text-shadow: 0 0 10px #fff;
+    }
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      color: red;
+      animation: fall 3s linear forwards;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-50px) scale(1); opacity: 1; }
+      100% { transform: translateY(100vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Click the Button to See the Surprise!</h1>
+  <button onclick="showBirthdayMessage()">Reveal</button>
+  <div id="message">🎉 Happy Birthday! ❤️ I Love You Tooba! ❤️ 🎉</div>
+
+  <!-- Background music (hidden) -->
+  <audio id="bg-music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f9a962b9f3.mp3?filename=cute-romantic-11277.mp3"></audio>
+
+  <script>
+    function showBirthdayMessage() {
+      const message = document.getElementById('message');
+      message.style.display = 'block';
+      createHearts();
+
+      // Play music
+      const music = document.getElementById('bg-music');
+      music.play();
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 50; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = '❤️';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.top = '-30px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>
