@@ -1,93 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hye Cutie!</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: seagreen; /* Sea green background */
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
-      overflow: hidden;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 15px 40px;
-      font-size: 1.3rem;
-      color: #fff;
-      background: #ff4d4d;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-    button:hover {
-      background: #e60000;
-    }
-    #message {
-      display: none;
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-top: 25px;
-      text-shadow: 0 0 10px #fff;
-    }
-    animation: wiggle 3s ease-in-out forwards; {
-      position: absolute;
-      font-size: 2rem;
-      color: red;
-      animation: fall 3s linear forwards;
-    }
-    @keyframes wiggle {
-  0% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(-10deg); }
-  50% { transform: translateY(0) rotate(10deg); }
-  75% { transform: translateY(-10px) rotate(-10deg); }
-  100% { transform: translateY(0) rotate(0deg); opacity: 0; }
-}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hye Cutie!</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: seagreen; /* Sea green background */
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 15px 40px;
+    font-size: 1.3rem;
+    color: #fff;
+    background: #ff4d4d;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  button:hover {
+    background: #e60000;
+  }
+
+  #message {
+    display: none;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 25px;
+    text-shadow: 0 0 10px #fff;
+  }
+
+  /* Hearts and sparkles */
+  .heart, .sparkle {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.8;
+  }
+
+  .sparkle {
+    color: white;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) scale(0.8); opacity: 1; }
+    50% { transform: translateY(-100px) translateX(30px) rotate(20deg); }
+    100% { transform: translateY(-200px) scale(1.2); opacity: 0; }
+  }
+
+  @keyframes sparkleAnim {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+</style>
 </head>
 <body>
-  <h1>Click the Button to See the Surprise!</h1>
-  <button onclick="showBirthdayMessage()">Reveal</button>
-  <div id="message">🎉 ! ❤️ I Love You Tooba! ❤️ 🎉</div>
+<h1>Click the Button to See the Surprise!</h1>
+<button onclick="showBirthdayMessage()">Reveal</button>
+<div id="message">❤️ I Love You Tooba ❤️</div>
 
-  <!-- Background music (hidden) -->
-  <audio id="bg-music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f9a962b9f3.mp3?filename=cute-romantic-11277.mp3"></audio>
+<!-- Cute background music -->
+<audio id="bg-music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f9a962b9f3.mp3?filename=cute-romantic-11277.mp3"></audio>
 
-  <script>
-    function showBirthdayMessage() {
-      const message = document.getElementById('message');
-      message.style.display = 'block';
-      createHearts();
+<script>
+function showBirthdayMessage() {
+  const message = document.getElementById('message');
+  message.style.display = 'block';
 
-      // Play music
-      const music = document.getElementById('bg-music');
-      music.play();
-    }
+  playMusic();
+  createHearts();
+  createSparkles();
+}
 
-    function createHearts() {
-      for (let i = 0; i < 50; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.textContent = '❤️';
-        heart.style.left = Math.random() * window.innerWidth + 'px';
-        heart.style.top = '-30px';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 3000);
-      }
-    }
-  </script>
+// Play music
+function playMusic() {
+  const music = document.getElementById('bg-music');
+  music.play();
+}
+
+// Floating red and pink hearts
+function createHearts() {
+  const colors = ['red', 'pink'];
+  for(let i = 0; i < 50; i++){
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = '❤️';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.bottom = '-50px';
+    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+    heart.style.fontSize = (15 + Math.random() * 25) + 'px';
+    heart.style.animation = `float ${3 + Math.random()*2}s ease-in forwards`;
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+}
+
+// Sparkles
+function createSparkles() {
+  for(let i=0;i<50;i++){
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.textContent = '✨';
+    sparkle.style.left = Math.random() * window.innerWidth + 'px';
+    sparkle.style.top = Math.random() * window.innerHeight + 'px';
+    sparkle.style.fontSize = (10 + Math.random() * 20) + 'px';
+    sparkle.style.animation = `sparkleAnim ${1 + Math.random()*1.5}s linear forwards`;
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 1500);
+  }
+}
+</script>
 </body>
 </html>
-
